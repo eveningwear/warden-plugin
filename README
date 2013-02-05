@@ -1,0 +1,38 @@
+Jenkins CloudFoundry Warden Plugin
+================
+
+What is CloudFoundry Warden Plugin
+------------
+Integrates CloudFoundry Warden to Jenkins
+http://wiki.jenkins-ci.org/display/JENKINS/CloudFoundry+Warden+Plugin
+
+What is Warden
+------------
+Warden is a framework that allows you to spawn containers in seconds and programmatically control resource isolation (memory, bandwidth, disk), mounts, proccesses and other things
+https://github.com/cloudfoundry/warden.git
+
+Installing
+----------
+You should usually just install this warden plugin from your Jenkins
+Management console (look under available plugins)
+
+Building
+---------
+$ mvn clean
+$ mvn package
+
+Building package without running the test.
+$ mvn package -Dmaven.test.skip=true
+
+Debugging
+---------
+The default port is 8080
+$ mvn hpi:run
+
+To replace the default port, e.g, 8090
+$ mvn hpi:run -Djetty.port=8090
+
+File a Bug:
+-----------
+To file a bug against Cloud Foundry Open Source and its components, sign up and use our bug tracking
+ system: [http://cloudfoundry.atlassian.net](http://cloudfoundry.atlassian.net)
