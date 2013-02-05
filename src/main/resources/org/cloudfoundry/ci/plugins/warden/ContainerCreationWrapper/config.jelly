@@ -1,0 +1,135 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+	<!--f:entry>
+		<f:repeatableProperty field="stacks" minimum="1" header="${%WardenMountPoint}" add="Add another mount point">
+		</f:repeatableProperty>
+    </f:entry-->
+    <f:entry title="${%WardenMountPoint}" field="mountPoints">
+		<table style="margin-top: 0; margin-bottom: 0; width: 100%;" cellspacing="0" cellpadding="0">
+        	<tr style="background-color:#dddddd;">
+            	<th width="40%" style="border-bottom: 1px solid grey;">
+                	${%Source Path}
+                </th>
+				<th width="40%" style="border-bottom: 1px solid grey;">
+                 	${%Destination Path}
+                </th>
+				<th width="100" style="border-bottom: 1px solid grey;">
+                 	${%Mount Mode}
+                </th>
+                <th width="60" style="border-bottom: 1px solid grey;">
+                	<st:nbsp/>
+                </th>
+			</tr>
+            <tr>
+            	<td align="center" valign="right" colspan="4" style="border-left: 1px solid grey; border-right: 1px solid black; border-bottom: 1px solid black;">
+                	<f:repeatable name="stacks" var="stack" items="${instance.stacks}" add="${%Add Mount Point}" minimum="1">
+                		<table width="100%" cellspacing="0" cellpadding="4">
+                        	<tr>
+                            	<td width="40%" style="border-bottom: 1px solid grey;">
+									<f:textbox field="srcPath" value="${stack.srcPath}" default=""/>
+                                </td>
+                                <td width="40%" style="border-bottom: 1px solid grey;">
+									<f:textbox field="destPath" value="${stack.destPath}" default=""/>
+                                </td>
+                                <td width="100" align="center" valign="middle" style="border-bottom: 1px solid grey;">
+					                <select name="mntMode" field="mntMode">
+					                	<j:choose>
+						                	<j:when test="${stack.mntMode=='RW'}">
+										        <option value="RO">Read Only</option>
+								        		<option value="RW" selected="selected">Read and Write</option>
+								        	</j:when>
+								        	<j:otherwise>
+										        <option value="RO" selected="selected">Read Only</option>
+								        		<option value="RW">Read and Write</option>
+								        	</j:otherwise>
+							        	</j:choose>
+								    </select>
+                                </td>
+                                <td width="60" align="center" valign="middle" style="border-bottom: 1px solid grey;">
+                                	<f:repeatableDeleteButton/>
+                                </td>
+                             </tr>
+                        </table>
+					</f:repeatable>
+				</td>
+			</tr>
+		</table>
+    </f:entry>
+    <f:advanced>
+		<f:optionalBlock inline="true" title="${%Enable Warden Limits}" field="limitItems">
+			<f:entry field="limited">
+			<table align="center" style="margin-top: 0; margin-bottom: 0; width: 80%" cellspacing="0" cellpadding="0">
+	        	<tr style="background-color:#dddddd;">
+	            	<th width="60" style="border-bottom: 1px solid grey;">
+	                	${%Limit Disk}
+	                </th>
+					<th width="60" style="border-bottom: 1px solid grey;">
+	                 	${%Limit Memory}
+	                </th>
+					<th width="60" style="border-bottom: 1px solid grey;">
+	                 	${%Limit Bandwidth}
+	                </th>
+				</tr>
+	            <tr>
+	            	<td width="60" style="border-bottom: 1px solid grey; border-left: 1px solid grey;" align="center" valign="middle">
+						<select name="limitDisk" field="limitDisk">
+							<j:forEach items="${descriptor.diskVolumes}" var="volume">
+								<j:choose>
+									<j:when test="${instance.limitDisk==volume}">
+										<option value="${volume}" selected="true">${volume}</option>
+									</j:when>
+									<j:otherwise>
+										<option value="${volume}">${volume}</option>
+									</j:otherwise>
+								</j:choose>
+							</j:forEach>
+						</select>
+	                </td>
+	                <td width="60" style="border-bottom: 1px solid grey;" align="center" valign="middle">
+						<select name="limitMemory" field="limitMemory">
+							<j:forEach items="${descriptor.memoryVolumes}" var="volume">
+								<j:choose>
+									<j:when test="${instance.limitMemory==volume}">
+										<option value="${volume}" selected="true">${volume}</option>
+									</j:when>
+									<j:otherwise>
+										<option value="${volume}">${volume}</option>
+									</j:otherwise>
+								</j:choose>
+							</j:forEach>
+						</select>
+	                </td>
+	                <td width="60" style="border-bottom: 1px solid grey; border-right: 1px solid black;" align="center" valign="middle">
+						<select name="limitBandwidth" field="limitBandwidth">
+							<j:forEach items="${descriptor.bandwidthVolumes}" var="volume">
+								<j:choose>
+									<j:when test="${instance.limitBandwidth==volume}">
+										<option value="${volume}" selected="true">${volume}</option>
+									</j:when>
+									<j:otherwise>
+										<option value="${volume}">${volume}</option>
+									</j:otherwise>
+								</j:choose>
+							</j:forEach>
+						</select>
+	                </td>
+				</tr>
+			</table>
+			</f:entry>
+			<!--f:entry title="${%Limit Memory}" field="limitMemory">
+				<f:textbox/>
+			</f:entry>
+			<f:entry title="${%Limit Disk}" field="limitDisk">
+				<f:textbox/>
+			</f:entry>
+			<f:entry title="${%Limit Bandwidth}" field="limitBandwidth">
+				<f:textbox/>
+			</f:entry-->
+		</f:optionalBlock>
+		<f:optionalBlock inline="true" title="${%IgnorePassword}" field="ignorePassword"/>
+		<f:entry title="${%GraceTime}" field="graceTime">
+			<f:textbox default="200"/>
+		</f:entry>
+	</f:advanced>
+</j:jelly>

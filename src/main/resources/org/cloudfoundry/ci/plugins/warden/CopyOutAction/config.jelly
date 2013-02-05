@@ -1,0 +1,16 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+	<f:entry>
+		<f:entry title="Source Path" field="srcPath">
+			<f:textbox />
+		</f:entry>
+		<f:entry title="Destination Path" field="destPath">
+			<f:textbox />
+		</f:entry>
+		<f:entry>
+			<f:repeatableDeleteButton />
+		</f:entry>
+	</f:entry>
+
+</j:jelly>

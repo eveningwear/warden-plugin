@@ -1,0 +1,44 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
+
+	<!--f:entry>
+		<f:repeatableProperty field="stacks" minimum="1" header="${%Copy Out}" add="Add another copy-out">
+		</f:repeatableProperty>
+	</f:entry-->
+	
+	<f:entry field="copyOut">
+		<table align="right" style="margin-top: 0; margin-bottom: 0; width: 90%;" cellspacing="0" cellpadding="0">
+        	<tr style="background-color:#dddddd;">
+            	<th width="50%" style="border-bottom: 1px solid grey;">
+                	${%Source Path}
+                </th>
+				<th width="50%" style="border-bottom: 1px solid grey;">
+                 	${%Destination Path}
+                </th>
+                <th style="border-bottom: 1px solid grey;">
+                	<st:nbsp/>
+                </th>
+			</tr>
+            <tr>
+            	<td align="center" valign="right" colspan="3" style="border-left: 1px solid grey; border-right: 1px solid black; border-bottom: 1px solid black;">
+                	<f:repeatable name="stacks" var="stack" items="${instance.stacks}" add="${%Add More}" minimum="1">
+                		<table width="100%" cellspacing="0" cellpadding="4">
+                        	<tr>
+                            	<td width="50%" style="border-bottom: 1px solid grey;">
+									<f:textbox field="srcPath" value="${stack.srcPath}" default=""/>
+                                </td>
+                                <td width="50%" style="border-bottom: 1px solid grey;">
+									<f:textbox field="destPath" value="${stack.destPath}" default=""/>
+                                </td>
+                                <td align="center" valign="middle" style="border-bottom: 1px solid grey;">
+                                	<f:repeatableDeleteButton/>
+                                </td>
+                             </tr>
+                        </table>
+					</f:repeatable>
+				</td>
+			</tr>
+		</table>
+    </f:entry>
+	
+</j:jelly>
